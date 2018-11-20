@@ -1,0 +1,8 @@
+com\qu\bean\Result.class
+com\qu\bean\BookSearch.class
+com\qu\bean\login.class
+com\qu\bean\Book.class
+com\qu\dao\BookDao.class
+com\qu\Service\Impl\BookServiceImpl.class
+com\qu\Service\BookService.class
+com\qu\Controller\BookController.class

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qu.dao.BookDao">
+    <insert id="insertBook" parameterType="book">
+        insert into book (name,description,kc,status)
+        VALUES
+        (#{book.name},#{book.description},#{book.kc},1)
+    </insert>
+    <delete id="deleteBook">
+        UPDATE book SET status=2 WHERE id=#{id}
+    </delete>
+
+    <update id="update" parameterType="book">
+           UPDATE book set
+            <trim suffixOverrides=",">
+           <if test="book.name!=null and book.name!=''">name=#{book.name},</if>
+           <if test="book.description!=null and book.description!=''">description=#{book.description},</if>
+           <if test="book.kc!=null">kc=#{book.kc},</if>
+            </trim>
+        WHERE id=#{book.id}
+    </update>
+
+    <select id="getBooks" resultType="book">
+        select * from book
+        <where>
+            <if test="booksearch.name!=null and booksearch.name!=''"> and name like concat('%',#{booksearch.name},'%')</if>
+            <if test="booksearch.description!=null and booksearch.description!=''"> and description like concat('%',#{booksearch.description},'%')</if>
+            <if test="booksearch.kc!=null and booksearch.kc!=''">and kc=#{booksearch.kc}</if>
+        </where>
+    </select>
+</mapper>
